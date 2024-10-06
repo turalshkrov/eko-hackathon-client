@@ -70,7 +70,7 @@ export const SearchModal = () => {
 		reader.onload = () => {
 			const base64String = reader.result as string;
 			setFieldValue("image", base64String);
-			setPlantImage(base64String);
+			setPlantImage(base64String.replace(/^data:image\/\w+;base64,/, ""));
 		};
 
 		reader.readAsDataURL(file);

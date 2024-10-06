@@ -83,7 +83,7 @@ function Home() {
 			<Row className="top-0 p-4 z-50 items-center">
 				<Col span={0} md={6} className="text-center">
 					<Title level={4} className="!m-0">
-						Eko Finder
+						EcoFinder
 					</Title>
 				</Col>
 				<Col span={24} md={12} style={{ height: "32px" }}>
