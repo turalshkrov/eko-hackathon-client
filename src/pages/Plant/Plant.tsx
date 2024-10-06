@@ -3,6 +3,7 @@ import { Col, Row, Typography, Image, List, Flex, Divider } from "antd";
 import axios from "axios";
 import L from "leaflet";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
+import plantIcon from "../../assets/45777.png";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import { useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
@@ -12,6 +13,12 @@ import { FaTree } from "react-icons/fa";
 const customIcon = new L.Icon({
 	iconUrl: markerIcon,
 	iconRetinaUrl: markerIcon2x,
+	iconSize: [25, 41],
+});
+
+const customPlantIcon = new L.Icon({
+	iconUrl: plantIcon,
+	iconRetinaUrl: plantIcon,
 	iconSize: [25, 41],
 });
 
@@ -83,6 +90,15 @@ export const Plant = () => {
 										</Popup>
 									</Marker>
 								))}
+
+								{plantData &&
+									plantData.locations.map((location) => (
+										<Marker
+											key={location.latitude}
+											position={[location.latitude, location.longitude]}
+											icon={customPlantIcon}
+										/>
+									))}
 
 								<ChangeView center={position} />
 							</MapContainer>
