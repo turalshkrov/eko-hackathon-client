@@ -28,19 +28,20 @@ export const SearchModal = () => {
 	const [form] = useForm();
 	const { setFieldValue } = form;
 	const handleSubmit = async () => {
-		if (!selectedPlant) {
+		if (selectedPlant) {
 			dispatch(setIsOpen({ id: "search", isOpen: false }));
-			selectedPlant && navigate(`/plants/${selectedPlant}`);
+			navigate(`/plants/${selectedPlant}`);
 		}
 		if (plantImage) {
-			axios
-				.post(`https://azercosmos-hackaton.vercel.app/plants/file`, {
+			const response = await axios.post(
+				`https://azercosmos-hackaton.vercel.app/plants/file`,
+				{
 					image: plantImage,
-				})
-				.then((response) => {
-					navigate(`/plants/${response.data.data.id}`);
-				})
-				.catch(() => toast.error("No plants found"));
+				}
+			);
+			response.data.data
+				? navigate(`/plants/${response.data.data.id}`)
+				: toast.error("No plants found");
 		}
 	};
 	const dispatch = useAppDispatch();

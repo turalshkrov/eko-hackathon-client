@@ -18,3 +18,9 @@ export interface iPlant {
 		longitude: number;
 	}[];
 }
+
+export interface iGallery {
+	id: string;
+	park_id: string;
+	image_url: string;
+}
