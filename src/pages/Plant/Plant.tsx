@@ -1,15 +1,5 @@
 import { iPark, iPlant } from "../../types";
-import {
-	Col,
-	Form,
-	Row,
-	Typography,
-	Image,
-	List,
-	Flex,
-	Space,
-	Divider,
-} from "antd";
+import { Col, Row, Typography, Image, List, Flex, Divider } from "antd";
 import axios from "axios";
 import L from "leaflet";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -35,12 +25,10 @@ export const Plant = () => {
 		map.setView(center);
 		return null;
 	}
-	const [form] = Form.useForm();
 	const { id } = useParams();
 
 	const [plantData, setPlantData] = useState<iPlant>();
-
-	const [park, setPark] = useState<iPark>();
+	const [mapStyle, setMapStyle] = useState<any>();
 
 	useEffect(() => {
 		axios
@@ -48,6 +36,7 @@ export const Plant = () => {
 			.then((response) => {
 				setPlantData(response.data.data);
 			});
+		setMapStyle({ height: "100vh", position: "sticky", top: 0 });
 	}, [id]);
 
 	const handleParkClick = (park: iPark) => {
@@ -63,8 +52,8 @@ export const Plant = () => {
 							<MapContainer
 								center={[40.37, 47.86]}
 								zoom={8}
-								className="h-96 md:h-screen"
-								style={{ position: "sticky", top: 64 }}
+								className="!h-96 md:!h-screen"
+								style={mapStyle}
 							>
 								<TileLayer
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

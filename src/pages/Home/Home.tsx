@@ -22,12 +22,11 @@ import {
 } from "antd";
 import { Link } from "react-router-dom";
 import { SiCodemagic } from "react-icons/si";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 import { setIsOpen } from "../../store/ModalSlice/modalSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { iPark, iPlant } from "../../types";
-import { setShowPlant } from "../../store/PlantSlice/PlantSlice";
+import { iPark } from "../../types";
 import Modals from "../../components/Modals";
 
 const customIcon = new L.Icon({
@@ -41,7 +40,6 @@ function Home() {
 	const [form] = Form.useForm();
 	const { getFieldValue } = form;
 	const [parks, setParks] = useState<iPark[]>([]);
-	const [plantData, setPlantData] = useState<iPlant>();
 	const dispatch = useAppDispatch();
 	const getParks = async () => {
 		const name = getFieldValue("name");
@@ -62,6 +60,7 @@ function Home() {
 
 	function ChangeView({ center }: { center: [number, number] }) {
 		const map = useMap();
+		map.invalidateSize();
 		map.setView(center);
 		return null;
 	}
@@ -84,7 +83,7 @@ function Home() {
 			<Row className="top-0 p-4 z-50 items-center">
 				<Col span={0} md={6} className="text-center">
 					<Title level={4} className="!m-0">
-						Tural
+						Eko Finder
 					</Title>
 				</Col>
 				<Col span={24} md={12} style={{ height: "32px" }}>
@@ -93,9 +92,6 @@ function Home() {
 							<Input.Search className="w-full" onChange={getParks} />
 						</Form.Item>
 					</Form>
-				</Col>
-				<Col span={0} md={6} className="text-center">
-					<Link to="/profile">Profile</Link>
 				</Col>
 			</Row>
 			<MapContainer

@@ -17,17 +17,31 @@ import { useState } from "react";
 import { iPlant } from "../../types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const { Title } = Typography;
 
 export const SearchModal = () => {
+	const [plantImage, setPlantImage] = useState<string>();
 	const [selectedPlant, setSelectedPlant] = useState<string>();
 	const navigate = useNavigate();
 	const [form] = useForm();
-	const { getFieldValue, setFieldValue } = form;
-	const handleSubmit = () => {
-		dispatch(setIsOpen({ id: "search", isOpen: false }));
-		selectedPlant && navigate(`/plants/${selectedPlant}`);
+	const { setFieldValue } = form;
+	const handleSubmit = async () => {
+		if (!selectedPlant) {
+			dispatch(setIsOpen({ id: "search", isOpen: false }));
+			selectedPlant && navigate(`/plants/${selectedPlant}`);
+		}
+		if (plantImage) {
+			axios
+				.post(`https://azercosmos-hackaton.vercel.app/plants/file`, {
+					image: plantImage,
+				})
+				.then((response) => {
+					navigate(`/plants/${response.data.data.id}`);
+				})
+				.catch(() => toast.error("No plants found"));
+		}
 	};
 	const dispatch = useAppDispatch();
 	const isOpen = useAppSelector((state) =>
@@ -56,7 +70,7 @@ export const SearchModal = () => {
 		reader.onload = () => {
 			const base64String = reader.result as string;
 			setFieldValue("image", base64String);
-			console.log(base64String);
+			setPlantImage(base64String);
 		};
 
 		reader.readAsDataURL(file);

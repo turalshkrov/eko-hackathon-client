@@ -13,7 +13,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { iPark } from "@/types";
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
@@ -35,12 +35,15 @@ function Park() {
 	const dispatch = useAppDispatch();
 	const { id } = useParams();
 	const [parkData, setParkData] = useState<iPark>();
+	const [mapStyle, setMapStyle] = useState<any>();
 	useEffect(() => {
 		axios
 			.get(`https://azercosmos-hackaton.vercel.app/parks/${id}`)
 			.then((response) => {
 				setParkData(response.data.data);
 			});
+
+		setMapStyle({ height: "100vh", position: "sticky", top: 0 });
 	}, [id]);
 
 	const [form] = Form.useForm();
@@ -66,8 +69,8 @@ function Park() {
 							<MapContainer
 								center={[parkData?.latitude, parkData?.longitude]}
 								zoom={12}
-								className="h-96 md:h-screen"
-								style={{ position: "sticky", top: 0 }}
+								className="!h-96 md:!h-screen"
+								style={mapStyle}
 							>
 								<TileLayer
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
