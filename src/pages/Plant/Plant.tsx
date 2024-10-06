@@ -95,7 +95,7 @@ export const Plant = () => {
 									plantData.locations.map((location) => (
 										<Marker
 											key={location.latitude}
-											position={[location.latitude, location.longitude]}
+											position={[location.longitude, location.latitude]}
 											icon={customPlantIcon}
 										/>
 									))}
