@@ -28,6 +28,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { iPark } from "../../types";
 import Modals from "../../components/Modals";
+import Logo from "../../assets/logo.png";
 
 const customIcon = new L.Icon({
 	iconUrl: markerIcon,
@@ -81,8 +82,9 @@ function Home() {
 	return (
 		<>
 			<Row className="top-0 p-4 z-50 items-center">
-				<Col span={0} md={6} className="text-center">
-					<Title level={4} className="!m-0">
+				<Col span={0} md={6} className="!m-0 flex items-center justify-center">
+					<Image src={Logo} alt="logo" preview={false} width={40} />
+					<Title level={4} className="!m-0 !ml-4">
 						EcoFinder
 					</Title>
 				</Col>
@@ -120,12 +122,17 @@ function Home() {
 										{park.name}
 									</Title>
 								</Link>
-								<Text type="secondary">{park.description}</Text>
+								<Text type="secondary">
+									{park.description.length > 60
+										? park.description.substring(0, 60) + "..."
+										: park.description}
+								</Text>
 								<br />
 								<Image
 									src={park.image_url}
 									preview={false}
-									width={200}
+									width={300}
+									height={200}
 									className="mt-2"
 								/>
 							</Popup>
