@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { iPark } from "../../types";
 import Modals from "../../components/Modals";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/Logo.png";
 
 const customIcon = new L.Icon({
 	iconUrl: markerIcon,
