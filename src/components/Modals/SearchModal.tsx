@@ -39,7 +39,7 @@ export const SearchModal = () => {
 					image: plantImage,
 				}
 			);
-			response.data.data
+			response.data
 				? navigate(`/plants/${response.data.data.id}`)
 				: toast.error("No plants found");
 		}
