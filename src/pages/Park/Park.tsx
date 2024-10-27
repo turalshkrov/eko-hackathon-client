@@ -67,7 +67,7 @@ function Park() {
 			});
 
 		axios
-			.get(`https://azercosmos-hackaton.vercel.app/reviews?park_id=${id}`)
+			.get(`https://azercosmos-hackaton.vercel.app/reviews?parkId=${id}`)
 			.then((response) => {
 				setReviews(response.data.data);
 				setLoading(false);
@@ -122,7 +122,11 @@ function Park() {
 							>
 								{parkData.name}
 							</Title>
-							<Title level={3} className="!text-white md:ml-16 ">
+							<Title
+								level={3}
+								className="!text-white md:ml-16"
+								ellipsis={{ rows: 8 }}
+							>
 								{parkData.description}
 							</Title>
 						</Col>
