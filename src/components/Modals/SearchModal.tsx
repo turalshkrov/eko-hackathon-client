@@ -9,7 +9,6 @@ import {
 	Typography,
 	Form,
 	Tabs,
-	Radio,
 	AutoComplete,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -97,15 +96,6 @@ export const SearchModal = () => {
 				Search with image or text
 			</Title>
 			<Form className="mt-4" form={form}>
-				<Form.Item name="type">
-					<Radio.Group
-						options={[
-							{ label: "Plant", value: "plant" },
-							{ label: "Animal", value: "animal" },
-						]}
-						optionType="button"
-					/>
-				</Form.Item>
 				<Tabs
 					items={[
 						{

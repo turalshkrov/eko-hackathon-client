@@ -53,25 +53,25 @@ export const Header = () => {
 
 			<Col span={24} md={14} className="flex items-center justify-center">
 				<Link to="/" className="ml-4">
-					<Title level={5} className="!m-0 !ml-4">
+					<Title level={5} className="!m-0 !ml-4 !font-bold">
 						Home
 					</Title>
 				</Link>
 
 				<Link to="/parks" className="ml-4">
-					<Title level={5} className="!m-0 !ml-4">
+					<Title level={5} className="!m-0 !ml-4 !font-bold">
 						Parks
 					</Title>
 				</Link>
 
 				<Link to="/browse" className="ml-4">
-					<Title level={5} className="!m-0 !ml-4">
+					<Title level={5} className="!m-0 !ml-4 !font-bold">
 						Browse
 					</Title>
 				</Link>
 
 				<Link to="/about" className="ml-4">
-					<Title level={5} className="!m-0 !ml-4">
+					<Title level={5} className="!m-0 !ml-4 !font-bold">
 						About
 					</Title>
 				</Link>
