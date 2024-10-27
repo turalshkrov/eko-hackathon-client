@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card-cover {
+	object-fit: cover;
+	object-position: center;
+}
+
+.banner {
+	display: flex;
+	flex-direction: column;
+	height: 700px;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+		url("./assets/banner.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

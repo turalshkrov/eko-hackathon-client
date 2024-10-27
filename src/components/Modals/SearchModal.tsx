@@ -39,9 +39,12 @@ export const SearchModal = () => {
 					image: plantImage,
 				}
 			);
-			response.data
-				? navigate(`/plants/${response.data.data.id}`)
-				: toast.error("No plants found");
+			if (response.data) {
+				dispatch(setIsOpen({ id: "search", isOpen: false }));
+				navigate(`/plants/${response.data.data.id}`);
+			} else {
+				toast.error("No plants found");
+			}
 		}
 	};
 	const dispatch = useAppDispatch();
